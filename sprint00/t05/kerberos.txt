@@ -1,0 +1,4 @@
+klist -A
+kinit 'kshvydkyi'
+kdestroy
+
