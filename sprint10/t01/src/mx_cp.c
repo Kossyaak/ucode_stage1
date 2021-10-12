@@ -1,42 +1,39 @@
 #include "../inc/header.h"
 
-int main(int argc, char *argv[])
+int if_open(char *a) 
 {
-    if(argc != 3)
-    {
-        mx_printerr("usage: ./mx_cp [source_file] [destination_file]\n");
-        exit(-1);
+    int file = open(a, 0);
+    if (file < 0) {
+        write(2, "error\n", 6);
+        return -1;
     }
-    char *filename1 = argv[1];
-    char *filename2 = argv[2];
-    int f1 = open(filename1, O_RDONLY);
-    int f2 = open(filename2, O_CREAT | O_EXCL | O_WRONLY, S_IWUSR | S_IRUSR);
-    if(f1 < 0)
-    {
-        mx_printerr("mx_cp: ");
-        mx_printerr(filename1);
-        mx_printerr(": No such file or directiory\n");
-        exit(-1);
-    }
-    int size;  
-    char buffer[1];
-    size = read(f1, buffer, 1);
-    for(int i = 0; size; i++)
-    {
-        write(f2, buffer, 1);
-        size = read(f1, buffer, 1);
-    }
-    int cl1 = close(f1);
-    int cl2 = close(f2);
-    if(cl1 < 0 || cl2 < 0)
-    {
-        mx_printerr("Error close file\n");
-        exit(-1);
-    }
-    return 0;
-
+    return file;
+}
+int file_w(char *a) {
+    return open(a, O_CREAT | O_EXCL | O_WRONLY, S_IWUSR | S_IRUSR);
 }
 
+int main(int argc, char *argv[]) 
+{
+    if (argc != 3) {
+        write(2, "usage: ./mx_cp [source_file] [destination_file]\n", 48);
+        return -1;
+    }
+    int file1 = if_open(argv[1]);
+    if(file1 == -1)
+    {
+        return -1;
+    }
+    int file2 = file_w(argv[2]);
+    char c;
+    while (read(file1, &c, 1))
+    {
+        write(file2, &c, 1);
+    }
+    close(file1);
+    close(file2);
+    return 0;
+}
 
 
 

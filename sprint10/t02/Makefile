@@ -1,18 +1,20 @@
-flags := -std=c11 -Wall -Wextra -Werror -Wpedantic
-name := mx_cat
+NAME = mx_cat
+SRC_D = src
+INC_D = inc
+SRC_F = src/*.c
+INC_F = inc/header.h
+CLANG = clang -std=c11 -Wall -Wextra -Werror -Wpedantic
+RM = rm -rf
+all: clean $(NAME) 
 
-all: $(name)
-
-$(name):
-	clang $(flags) -Iinc -o $(name) src/*.c
+$(NAME):
+	@$(CLANG) $(SRC_F) -o $@ -I $(INC_D)
 
 clean:
-	rm -rf $(name)
+	@$(RM) $(SRC_D)/*.h
 
-uninstall:
-	rm -rf $(name)
+uninstall: clean
+	@$(RM) $(NAME)
 
-reinstall:
-	make uninstall
-	make
-	
+reinstall: uninstall all
+

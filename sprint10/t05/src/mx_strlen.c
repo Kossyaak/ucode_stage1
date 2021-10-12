@@ -1,19 +1,14 @@
-#include "../inc/header.h"
+#include "header.h"
+
 int mx_strlen(const char *s)
 {
-    int len = 0;
-    for(int i = 0; *s++; i++)
+    int i = 0;
+    while(s[i] != '\0')
     {
-        len++;
+        i++;
     }
-    return len;
+    return i;
 }
-
-
-
-
-
-
 
 
 

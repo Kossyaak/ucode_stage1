@@ -1,48 +1,42 @@
 #include "../inc/header.h"
 
-int main(int argc, char *argv[])
+int if_open(char *a) 
 {
-    if(argc < 2)
-    {
-        int size;
-        char buffer[1];
-        size = read(0, buffer, 1);
-        for(int i = 0; size; i++)
-        {
-            write(1, &buffer, 1);
-            size = read(0, buffer, 1);
-        }
-        return 0;
-
+    int file = open(a, 0);
+    if (file < 0) {
+        write(2, "error\n", 6);
+        return -1;
     }
-    for(int i = 0; i < argc; i++)
+    return file;
+}
+
+int main(int argc, char *argv[]) 
+{
+    char c;
+    int file;
+    if (argc == 1) {
+        while (read(0, &c, 1))
+        {
+            write(1, &c, 1);
+        }
+    }
+    else
     {
-        int file = open(argv[i], O_RDONLY);
-        if(file < 0)
-        {
-            mx_printerr("mx_cat: ");
-            mx_printerr(argv[i]);
-            mx_printerr(": No such file or directory\n");
-            exit(-1);
+        for(int i = 1; i < argc; i++) {
+            file = if_open(argv[i]);
+            if (file != -1) 
+            {
+                while (read(file, &c, 1))
+                {
+                    write(1, &c, 1);
+                }
+            }
+            close(file);
         }
-        int size;
-        char buffer[1];
-        size = read(file, buffer, 1);
-        for(int i = 0; size; i++)
-        {
-            write(1, &buffer, 1);
-            size = read(file, buffer, 1);
-        }
-        int cl = close(file);
-        if(cl < 0)
-        {
-            mx_printerr("Error close file\n");
-            exit(-1);
-        }
-
-
     }
     return 0;
 }
+
+
 
 

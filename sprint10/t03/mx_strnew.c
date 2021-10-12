@@ -2,15 +2,20 @@
 
 char *mx_strnew(const int size) 
 {
-    if (size < 0) {
+    if (size < 1) 
+    {
         return NULL;
     }
-    char *result = (char *)malloc(size + 1);
-    for (int i = 0; i < size+1; i++)
+    else 
     {
-        result[i] = '\0';
+        char *str = malloc(size+1);
+        for (int i = 0; i < size; i++) 
+        {
+            str[i] = '\0';
+        }
+        str[size] = '\0';
+        return str;
     }
-    return result;
 }
 
 

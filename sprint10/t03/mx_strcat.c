@@ -2,14 +2,16 @@
 
 char *mx_strcat(char *s1, const char *s2) 
 {
-    int src_l = mx_strlen(s2);
-    int dst_l = mx_strlen(s1);
-    for (int i = 0; i < src_l + 1; i++) 
+    
+    int size_dst = mx_strlen(s1);
+    int size_src = mx_strlen(s2);
+    for(int i = size_dst, j = 0; j < size_src; i++, j++)
     {
-        s1[dst_l + i] = s2[i];
+        s1[i] = s2[j];
     }
-  return (char *)s1;
+   return s1;
 }
+
 
 
 

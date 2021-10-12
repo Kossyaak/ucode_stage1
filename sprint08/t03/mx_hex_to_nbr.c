@@ -4,7 +4,7 @@ unsigned long mx_hex_to_nbr(const char *hex)
 {
     if(hex == NULL)
     {
-        return NULL;
+        return 0;
     }
     unsigned long dec = 0; 
     unsigned long len = 0;
@@ -34,6 +34,8 @@ unsigned long mx_hex_to_nbr(const char *hex)
     }
     return dec;
 }
+
+
 
 
 

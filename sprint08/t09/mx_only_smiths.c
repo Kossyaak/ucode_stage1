@@ -30,3 +30,8 @@ t_agent **mx_only_smiths(t_agent **agents, int strength)
 
     return new_agents;
 }
+
+
+
+
+

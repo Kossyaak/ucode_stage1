@@ -1,21 +1,11 @@
-#include "../inc/header.h"
-bool mx_isdigit(int c)
-{
-    if (c > 47 && c < 58)
-    {
+#include "header.h"
+
+bool mx_isdigit(int i) {
+    if (i > 47 && i < 58) {
         return 1;
     }
-    else 
-    {
+    else {
         return 0;
     }
 }
-
-
-
-
-
-
-
-
 

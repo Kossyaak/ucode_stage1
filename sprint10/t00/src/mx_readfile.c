@@ -1,39 +1,28 @@
 #include "../inc/header.h"
 
-int main(int argc, char *argv[])
+int  if_open(char *a) 
 {
-    if(argc != 2)
-    {
-        mx_printerr("usage: ./read_file [file_path]\n");
-        exit(-1);
+    int file = open(a, 0);
+    if (file < 0) {
+        write(2, "error\n", 6);
+        return -1;
     }
-    char *filename = argv[1];
-    int file = open(filename, O_RDONLY);
-    if(file < 0)
-    {
-        mx_printerr("Error open file\n");
-        exit(-1);
-    }
-    int size; 
-    char buffer[1];
-    size = read(file, buffer, 1);
-    for(int i = 0; size; i++)
-    {
-        buffer[size] = '\0';
-        mx_printstr(buffer);
-        size = read(file, buffer, 1);
-    }
-    mx_printchar('\n');
-    int close_file = close(file);
-    if (close_file < 0)
-    {
-        mx_printerr("Error close file\n");
-        exit(-1);
-    }
+    return file;
+}
 
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        write(2, "usage: ./read_file [file_path]\n", 31);
+        return -1;
+    }
+    int file = if_open(argv[1]);
+    char c;
+    while (read(file, &c, 1) > 0) 
+    {
+        write(1, &c, 1);
+    }
+    close(file);
     return 0;
-
-
 }
 
 

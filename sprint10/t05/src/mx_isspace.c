@@ -1,25 +1,31 @@
-#include "../inc/header.h"
-bool mx_isspace(char c)
-{
-    if(c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-    {
-        return 1;
+#include "header.h"
+
+bool mx_isspace(char c) {
+    switch (c) {
+        case ' ':
+            return 1;
+        break;
+
+        case '\n':
+            return 1;
+        break;
+
+        case '\t':
+            return 1;
+        break;
+
+        case '\v':
+            return 1;
+        break;
+
+        case '\f':
+            return 1;
+        break;
+
+        case '\r':
+            return 1;
+        break;
     }
-    else 
-    {
-        return 0;
-    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

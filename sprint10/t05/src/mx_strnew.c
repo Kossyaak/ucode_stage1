@@ -1,24 +1,17 @@
-#include "../inc/header.h"
+#include "header.h"
 
-char *mx_strnew(const int size) 
-{
-    if (size < 0) {
+char *mx_strnew(const int size) {
+    if (size < 1) {
         return NULL;
     }
-    char *result = (char *)malloc(size + 1);
-    for (int i = 0; i < size+1; i++)
-    {
-        result[i] = '\0';
+    else {
+        char *str = malloc(size+1);
+        for (int i = 0; i < size; i++) {
+            str[i] = '\0';
+        }
+        str[size] = '\0';
+        return str;
     }
-    return result;
 }
-
-
-
-
-
-
-
-
 
 

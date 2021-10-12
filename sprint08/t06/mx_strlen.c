@@ -1,4 +1,4 @@
-int mx_strlen(const char *s);
+#include "create_agent.h"
 int mx_strlen(const char *s)
 {
     int len = 0;

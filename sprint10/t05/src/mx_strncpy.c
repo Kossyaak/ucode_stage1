@@ -1,16 +1,18 @@
-#include "../inc/header.h"
-char *mx_strncpy(char *dst, const char *src, int len) 
+#include "header.h"
+
+char *mx_strncpy(char *dst, const char *src, int len)
 {
-    for(int i = 0; src[i] != '\0'; i++) 
+    int i = 0;
+    for(; i < len; i++)
     {
-        if (i == len)
+        if(src[i] == '\0')
         {
             break;
         }
-    dst[i] = src[i];
-  
-  }
-  return (char *)dst;
+        dst[i] = src[i];
+    }
+    dst[i] = '\0';
+    return dst;
 }
 
 

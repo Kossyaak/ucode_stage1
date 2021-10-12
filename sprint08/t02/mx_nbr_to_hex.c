@@ -1,4 +1,5 @@
 #include "nbr_to_hex.h"
+
 char *mx_nbr_to_hex(unsigned long nbr)
 {
     if (nbr < 1) 
@@ -42,5 +43,10 @@ char *mx_nbr_to_hex(unsigned long nbr)
     return tmp;
 }
 
+int main(void)
+{
+    char *a = mx_nbr_to_hex(52);
+    printf("%s\n", a);
+}
 
 

@@ -1,4 +1,5 @@
 #include "nbr_to_hex.h" 
+
 char *mx_strnew(const int size)
 {
     if(size < 0)

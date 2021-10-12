@@ -1,4 +1,4 @@
-char *mx_strcpy(char *dst, const char *src);
+#include "create_agent.h"
 char *mx_strcpy(char *dst, const char *src)
 {
     int i = 0;

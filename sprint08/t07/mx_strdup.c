@@ -1,5 +1,5 @@
 #include "create_new_agents.h"
-char *mx_strnew(const int size);
+
 
 
 char *mx_strdup(const char *str)
@@ -16,4 +16,6 @@ char *mx_strdup(const char *str)
     mx_strcpy(buf, str);
     return buf;
 }
+
+
 

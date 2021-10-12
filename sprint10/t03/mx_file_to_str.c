@@ -1,44 +1,37 @@
 #include "file_to_str.h"
-char *mx_file_to_str(const char *filename)
+int if_open(char *a) 
 {
-    if (filename == NULL) 
-    {
-        return NULL;
+    int file = open(a, 0);
+    if (file < 0) {
+        write(2, "error\n", 6);
+        return -1;
     }
-    int file = open(filename, O_RDONLY);
-    if (file < 0) 
-    {
-        return NULL;
-    }
-    char buffer;
-    int length = 0; 
-    for(;read(file, &buffer, 1);) 
-    {
-        length++;
-    }
-    int cl = close(file);
-    if (cl < 0) 
-    {
-        return NULL;
-    }
-    file = open(filename, O_RDONLY);
-    if (file < 0) 
-    {
-        return NULL;
-    }
-    char *arr = mx_strnew(length);
-    int i = 0;
-    for(;read(file, &buffer, 1);) 
-    {
-        arr[i++] = buffer;
-    }
-    int cl1 = close(file);
-    if (cl1 < 0) 
-    {
-        return NULL;
-    }
-    return arr;
+    return file;
 }
+
+char *mx_file_to_str(const char* filename)
+{
+    char *dst = NULL;
+    int size = 0;
+    char c;
+    int file = if_open(filename);
+    while (read(file, &c, 1))
+    {
+        size++;
+    }
+    close(file);
+    file = if_open(filename);
+    dst = mx_strnew(size);
+    for (int i = 0; read(file, &c, 1); i++)
+    {
+        dst[i] = c;
+    }
+    close(file);
+    return dst;
+}
+
+
+
 
 
 
